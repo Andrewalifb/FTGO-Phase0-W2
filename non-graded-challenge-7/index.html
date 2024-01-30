@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>JAVASCRIPT CONDITIONAL</h2>
+    <label for="opsi-conditional">Pilih Conditional :</label>
+    <select id="opsi-conditional">
+      <option value="Bandingkan Angka">Bandingkan Angka</option>
+      <option value="Graduates">Graduates</option>
+      <option value="Konversi Menit">Konversi Menit</option>
+      <option value="Gacha">Gacha</option>
+    </select>
+    <button onclick="runFunction()">Select</button>
+    <h2>OUTPUT :</h2>
+    <h1 id="result"></h1>
+    <script>
+      function runFunction() {
+        let userInput1;
+        let userInput2;
+        let userInput3;
+
+        let selectedOpt = document.getElementById("opsi-conditional").value;
+        switch (selectedOpt) {
+          case "Bandingkan Angka":
+            bandingkanAngka();
+            break;
+          case "Graduates":
+            graduates();
+            break;
+          case "Konversi Menit":
+            konversiMenit();
+            break;
+          case "Gacha":
+            gacha();
+            break;
+        }
+      }
+      // CONDITIONAL : Bandingkan Angka
+      function bandingkanAngka() {
+        userInput1 = "";
+        userInput2 = "";
+        userInput3 = "";
+
+        userInput1 = prompt("Masukkan Angka Pertama :");
+        userInput2 = prompt("Masukkan Angka Kedua :");
+
+        let angka1 = parseFloat(userInput1);
+        let angka2 = parseFloat(userInput2);
+
+        if (!isNaN(userInput1) && !isNaN(userInput2)) {
+          if (angka2 > angka1) {
+            document.getElementById("result").innerHTML = true;
+          } else if (angka1 === angka2) {
+            document.getElementById("result").innerHTML = -1;
+          } else {
+            document.getElementById("result").innerHTML = false;
+          }
+        } else {
+          alert("Masukkan Angka !");
+        }
+      }
+
+      // CONDITIONAL : Graduates
+      function graduates() {
+        userInput1 = "";
+        userInput2 = "";
+        userInput3 = "";
+
+        userInput1 = prompt("Masukkan Nama Murid :");
+        userInput2 = prompt("Masukkan Nilai Murid :");
+        userInput3 = prompt("Masukkan Jumlah Ketidak Hadiran :");
+
+        let data = {
+          nama: userInput1,
+          nilai: userInput2,
+          absen: userInput3,
+        };
+
+        let nilaiMurid = parseFloat(userInput2);
+        let absenMurid = parseFloat(userInput3);
+
+        if (!isNaN(userInput2) && !isNaN(userInput3)) {
+          if (nilaiMurid > 70 && absenMurid < 5) {
+            document.getElementById(
+              "result"
+            ).innerHTML = `Murid an ${data.nama} dinyatakan LULUS`;
+          } else {
+            document.getElementById(
+              "result"
+            ).innerHTML = `Murid an ${data.nama} dinyatakan TIDAK LULUS`;
+          }
+        } else {
+          alert("Nilai dan Kehadiran harus Angka !");
+        }
+      }
+
+      // CONDITIONAL : Konversi Menit
+      function konversiMenit() {
+        userInput1 = "";
+        userInput1 = prompt("Masukkan Jumlah Detik :");
+
+        let detik = parseInt(userInput1);
+        let menit;
+        let sisaDetik;
+
+        if (!isNaN(detik)) {
+          menit = detik / 60;
+          sisaDetik = detik % 60;
+
+          document.getElementById("result").innerHTML = `${parseInt(
+            menit
+          )}:${sisaDetik}`;
+        } else {
+          alert("Masukkan Detik dalam Angka!");
+        }
+      }
+
+      // CONDITIONAL : Gatcha
+      function gacha() {
+        alert("TES KEBERUNTUNGAN MU");
+
+        const gachaNumber = parseInt(Math.floor(Math.random() * 6));
+        // Math.ceil
+
+        switch (gachaNumber) {
+          case 1:
+            document.getElementById("result").innerHTML = "coba lagi ya";
+            break;
+          case 2:
+            document.getElementById("result").innerHTML =
+              "selamat kamu mendapatkan kupon sebanyak 5";
+            break;
+          case 3:
+            document.getElementById("result").innerHTML =
+              "selamat kamu mendapatkan kupon sebanyak 15";
+            break;
+          case 4:
+            document.getElementById("result").innerHTML =
+              "selamat kamu mendapatkan kupon sebanyak 50";
+            break;
+          case 5:
+            document.getElementById("result").innerHTML =
+              "WOW, kamu menang jackpot! Selamat!!!";
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>
