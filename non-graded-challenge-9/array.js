@@ -57,6 +57,7 @@ function tentukanDeretGeometri2(arr) {
 
 console.log(tentukanDeretGeometri2([1, 3, 9, 27, 81]));
 console.log(tentukanDeretGeometri2([1, 3, 9, 27, 48]));
+/*===============================================================================================================*/
 
 // MENGELOMPOKKAN ANGKA
 
@@ -88,8 +89,11 @@ console.log(mengelompokkanAngka([1, 2, 3, 4, 5, 6, 7, 8, 9]));
 console.log(mengelompokkanAngka([100, 151, 122, 99, 111]));
 console.log(mengelompokkanAngka([]));
 
+/*===============================================================================================================*/
+
 // SITTING ARANGEMENT
 
+// First Method
 function sittingArrangement(person, column) {
   let kelas = [];
   let jumlahMurid = parseInt(person.length);
@@ -126,6 +130,65 @@ console.log(
   sittingArrangement([`Lukman`, `Adam`, `Dimas`, `Hansin`, `Orion`], 3)
 );
 
+// Second Method <=== THIS BRING MORE ACCURATE RESULT
+
+function sittingArrangement2(person, column) {
+  let kelas = [];
+  let seleksi = [];
+  let itemLenght = person.length + (person.length % column);
+
+  if (column < 1) {
+    return "Invalid Number";
+  } else if (column >= 1) {
+    for (let i = 0; i <= itemLenght; i++) {
+      let student = person[i];
+
+      if (seleksi.length !== column) {
+        if (student === undefined) {
+          seleksi.push("Kursi Kosong");
+        } else {
+          seleksi.push(student);
+        }
+      } else if (seleksi.length === column) {
+        kelas.push(seleksi.slice());
+
+        seleksi = [];
+        if (student === undefined) {
+          seleksi.push("Kursi Kosong");
+        } else {
+          seleksi.push(student);
+        }
+      }
+    }
+
+    if (person.length % column !== 0) {
+      if (kelas.length < column) {
+        let sisaKosong = column - kelas.length;
+
+        for (let j = 0; j <= sisaKosong; j++) {
+          if (seleksi.length !== column) {
+            seleksi.push("Kursi Kosong");
+          } else if (seleksi.length === column) {
+            kelas.push(seleksi.slice());
+            seleksi = [];
+            seleksi.push("Kursi Kosong");
+          }
+        }
+      }
+    }
+
+    return kelas;
+  }
+}
+
+console.log(sittingArrangement2([`A`, `B`, `C`, `D`], 0));
+console.log(sittingArrangement2([`Juli`, `Nisa`, `Desi`, `Ulfa`, `Fuji`], 2));
+console.log(sittingArrangement2([`Yosia`, `Asrawi`, `Andru`], 3));
+console.log(
+  sittingArrangement2([`Lukman`, `Adam`, `Dimas`, `Hansin`, `Orion`], 3)
+);
+/*===============================================================================================================*/
+
 // INTERESTING LADDER ARRAY MULTIDIMENSI
 
 function ladder(word) {
@@ -140,6 +203,7 @@ function ladder(word) {
 }
 console.log(ladder("developer"));
 console.log(ladder("arnold"));
+/*===============================================================================================================*/
 
 // TARGET TERDEKAT
 
